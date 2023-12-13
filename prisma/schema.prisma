@@ -9,3 +9,19 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Usuario {
+  id        Int    @id @default(autoincrement())
+  nome      String @db.VarChar(60)
+  sobrenome String @db.VarChar(60)
+
+  dtNascimento DateTime? @map("dt_nascimento")
+  ativo        Boolean   @default(true)
+  tipo         String    @db.Char(1)
+
+  dtCriacao DateTime @default(now()) @map("data_criacao")
+  dtAtualizacao DateTime @updatedAt @map("data_atualizacao")
+  email String?
+
+  @@map("usuario")
+}
